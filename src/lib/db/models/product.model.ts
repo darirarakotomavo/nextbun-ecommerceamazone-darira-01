@@ -1,5 +1,5 @@
 import { Document, model, Model, models, Schema } from "mongoose";
-import { IProductInput } from "../../../../types";
+import { IProductInput } from "../../../types";
 
 
 

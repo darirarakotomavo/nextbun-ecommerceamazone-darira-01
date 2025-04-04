@@ -1,11 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
+//import { Card, CardContent } from "@/components/ui/card";
 import { HomeCard } from "@/components/shared/home/home-card";
 import { HomeCarousel } from "@/components/shared/home/home-carousel";
+//import { Carousel } from "@/components/ui/carousel";
 import {
   getAllCategories,
   getProductsForCard,
 } from "@/lib/actions/product.actions";
 import { toSlug } from "@/lib/utils";
+import data from "@/lib/data";
 
 export default async function HomePage() {
   const categories = (await getAllCategories()).slice(0, 4);
@@ -21,20 +23,6 @@ export default async function HomePage() {
     tag: "best-seller",
     limit: 4,
   });
-  const carousels = [
-    {
-      image: "/images/banner-1.jpg",
-      title: "Discover Our New Arrivals",
-      url: "/search?tag=new-arrival",
-      buttonCaption: "Shop Now",
-    },
-    {
-      image: "/images/banner-2.jpg",
-      title: "Best Sellers Available Now",
-      url: "/search?tag=best-seller",
-      buttonCaption: "Discover",
-    },
-  ];
 
   const cards = [
     {
@@ -77,7 +65,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HomeCarousel items={carousels} />
+      <HomeCarousel items={data.carousels} />
       <div className="md:p-4 md:space-y-4 bg-border">
         <HomeCard cards={cards} />
       </div>
