@@ -23,6 +23,7 @@ export default function ProductGallery({ images }: { images: string[] }) {
                 ? "ring-2 ring-blue-500"
                 : "ring-1 ring-gray-300"
             }`}
+            title={`Sélectionner l'image ${index + 1}`}
           >
             <Image src={image} alt={"product image"} width={48} height={48} />
           </button>

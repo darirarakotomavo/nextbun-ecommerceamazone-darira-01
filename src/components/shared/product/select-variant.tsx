@@ -1,6 +1,8 @@
 import { IProduct } from "@/lib/db/models/product.model";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ColorSwatch } from "@/components/ColorSwatch"; // Importez le composant
+
 export default function SelectVariant({
   product,
   size,
@@ -36,10 +38,7 @@ export default function SelectVariant({
                 })}`}
                 key={x}
               >
-                <div
-                  style={{ backgroundColor: x }}
-                  className="h-4 w-4 rounded-full border border-muted-foreground"
-                ></div>
+                <ColorSwatch color={x} /> {/* Utilisez le composant ici */}
                 {x}
               </Link>
             </Button>
@@ -54,7 +53,7 @@ export default function SelectVariant({
               asChild
               variant="outline"
               className={
-                selectedSize === x ? "border-2  border-primary" : "border-2  "
+                selectedSize === x ? "border-2 border-primary" : "border-2"
               }
               key={x}
             >
