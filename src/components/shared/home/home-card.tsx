@@ -37,7 +37,7 @@ export function HomeCard({ cards }: { cards: CardItem[] }) {
                   />
                   <p className="text-center text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                     {item.name}
-                  </p>
+                  </p> 
                 </Link>
               ))}
             </div>

@@ -38,7 +38,8 @@ export default function SelectVariant({
                 })}`}
                 key={x}
               >
-                <ColorSwatch color={x} /> {/* Utilisez le composant ici */}
+                <ColorSwatch color={x} />
+                {/* Utilisez le composant ici */}
                 {x}
               </Link>
             </Button>

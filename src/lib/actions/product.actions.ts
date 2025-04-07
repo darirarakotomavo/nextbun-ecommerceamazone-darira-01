@@ -1,11 +1,10 @@
 "use server";
 
-//import { connectToDatabase } from "@/lib/db";
-//import Product from "@/lib/db/models/product.model";
+import { connectToDatabase } from "@/lib/db";
+import Product from "@/lib/db/models/product.model";
 import { PAGE_SIZE } from "../constants";
-import { connectToDatabase } from "../db";
-import Product from "../db/models/product.model";   
 import { IProduct } from "@/lib/db/models/product.model";
+
 export async function getAllCategories() {
   await connectToDatabase();
   const categories = await Product.find({ isPublished: true }).distinct(
@@ -79,7 +78,7 @@ export async function getProductsByTag({
   tag,
   limit = 10,
 }: {
-  tag: string;
+  tag: string; 
   limit?: number;
 }) {
   await connectToDatabase();

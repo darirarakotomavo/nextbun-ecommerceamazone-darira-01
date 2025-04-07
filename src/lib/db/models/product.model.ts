@@ -1,10 +1,6 @@
 import { Document, model, Model, models, Schema } from "mongoose";
 import { IProductInput } from "../../../types";
 
-
-
-
-
 export interface IProduct extends Document, IProductInput {
   _id: string;
   createdAt: Date;
