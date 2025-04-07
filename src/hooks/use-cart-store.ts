@@ -16,6 +16,14 @@ const initialState: Cart = {
 interface CartState {
   cart: Cart;
   addItem: (item: OrderItem, quantity: number) => Promise<string>;
+  updateItem: (
+    item: Pick<OrderItem, "product" | "color" | "size">,
+    newQuantity: number
+  ) => Promise<void>;
+  removeItem: (
+    item: Pick<OrderItem, "product" | "color" | "size">
+  ) => Promise<void>;
+  init: () => void;
 }
 
 const useCartStore = create(
@@ -69,6 +77,61 @@ const useCartStore = create(
             x.size === item.size
         )?.clientId!;
       },
+
+      updateItem: async (item, newQuantity) => {
+        const { items } = get().cart;
+        const existItem = items.find(
+          (x) =>
+            x.product === item.product &&
+            x.color === item.color &&
+            x.size === item.size
+        );
+
+        if (!existItem) {
+          throw new Error("Item not found in cart");
+        }
+
+        if (newQuantity > existItem.countInStock) {
+          throw new Error("Not enough items in stock");
+        }
+
+        const updatedCartItems = items.map((x) =>
+          x.product === item.product &&
+          x.color === item.color &&
+          x.size === item.size
+            ? { ...x, quantity: newQuantity }
+            : x
+        );
+
+        set({
+          cart: {
+            ...get().cart,
+            items: updatedCartItems,
+            ...(await calcDeliveryDateAndPrice({ items: updatedCartItems })),
+          },
+        });
+      },
+
+      removeItem: async (item) => {
+        const { items } = get().cart;
+        const updatedCartItems = items.filter(
+          (x) =>
+            !(
+              x.product === item.product &&
+              x.color === item.color &&
+              x.size === item.size
+            )
+        );
+
+        set({
+          cart: {
+            ...get().cart,
+            items: updatedCartItems,
+            ...(await calcDeliveryDateAndPrice({ items: updatedCartItems })),
+          },
+        });
+      },
+
       init: () => set({ cart: initialState }),
     }),
     {
@@ -76,4 +139,5 @@ const useCartStore = create(
     }
   )
 );
+
 export default useCartStore;
