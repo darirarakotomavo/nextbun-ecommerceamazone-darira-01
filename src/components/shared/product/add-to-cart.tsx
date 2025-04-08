@@ -40,11 +40,18 @@ export default function AddToCart({
               </Button>
             ),
           });
-        } catch (error: any) {
-          toast({
-            variant: "destructive",
-            description: error.message,
-          });
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            toast({
+              variant: "destructive",
+              description: error.message,
+            });
+          } else {
+            toast({
+              variant: "destructive",
+              description: "Failed to add item to cart",
+            });
+          }
         }
       }}
     >
@@ -75,11 +82,18 @@ export default function AddToCart({
           try {
             const itemId = await addItem(item, quantity);
             router.push(`/cart/${itemId}`);
-          } catch (error: any) {
-            toast({
-              variant: "destructive",
-              description: error.message,
-            });
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              toast({
+                variant: "destructive",
+                description: error.message,
+              });
+            } else {
+              toast({
+                variant: "destructive",
+                description: "Failed to add item to cart",
+              });
+            }
           }
         }}
       >
@@ -91,11 +105,18 @@ export default function AddToCart({
           try {
             addItem(item, quantity);
             router.push(`/checkout`);
-          } catch (error: any) {
-            toast({
-              variant: "destructive",
-              description: error.message,
-            });
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              toast({
+                variant: "destructive",
+                description: error.message,
+              });
+            } else {
+              toast({
+                variant: "destructive",
+                description: "Failed to add item to cart",
+              });
+            }
           }
         }}
         className="w-full rounded-full "
