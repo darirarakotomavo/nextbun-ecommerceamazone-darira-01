@@ -629,7 +629,7 @@ const CheckoutForm = () => {
                               }
                             >
                               {availableDeliveryDates.map((dd) => (
-                                <div key={dd.name} className="flex">
+                                <li key={dd.name} className="flex">
                                   <RadioGroupItem
                                     value={dd.name}
                                     id={`address-${dd.name}`}
@@ -659,7 +659,7 @@ const CheckoutForm = () => {
                                       )}
                                     </div>
                                   </Label>
-                                </div>
+                                </li>
                               ))}
                             </RadioGroup>
                           </ul>
